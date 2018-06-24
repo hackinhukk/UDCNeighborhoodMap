@@ -27,7 +27,7 @@
         // Constructor creates a new map - only center and zoom are required.
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat:40.666093, lng: -75.234634},
-          zoom: 13
+          zoom: 14
         });
         // These are the markers that will automatically be shown to the users
         // Could put this into a database, need 5 locations to automatically show up
@@ -41,6 +41,11 @@
 
         var largeInfowindow = new google.maps.InfoWindow();
         var bounds = new google.maps.LatLngBounds();
+        // This will be a default marker color for the icon.
+        var defaultIcon = makeMarkerIcon('FF0404');
+        // Create a "highlighted location" marker color for when the user
+        // mouses over the marker.
+        var highlightedIcon = makeMarkerIcon('1245FC');
 
         // The following group uses the location array to create an array of markers on initiailize.
         for (var i = 0; i < locations.length; i++) {
@@ -53,6 +58,7 @@
             position: position,
             title: title,
             animation: google.maps.Animation.DROP,
+            icon: defaultIcon,
             id: i
           });
           // Push the marker to our array of markers.
@@ -60,6 +66,14 @@
           // Create an onclick event to open an infowindow at each marker.
           marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
+          });
+          // event listener - for mouseover
+          marker.addListener('mouseover', function(){
+            this.setIcon(highlightedIcon);
+          });
+
+          marker.addListener('mouseout', function() {
+            this.setIcon(defaultIcon);
           });
           bounds.extend(markers[i].position);
         }
@@ -78,9 +92,20 @@
           infowindow.open(map, marker);
           // Make sure ther marker property is cleared if the infowindow is closed.
           infowindow.addListener('closeclick', function(){
-            infowindow.setMarker = null;
+            infowindow.marker = null;
           });
         }
+      }
+
+        // This function
+        function makeMarkerIcon(markerColor) {
+          var markerImage = new google.maps.MarkerImage(
+            'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor + '|40|_|%E2%80%A2',
+            new google.maps.Size(21, 34),
+            new google.maps.Point(0,0),
+            new google.maps.Point(10, 34),
+            new google.maps.Size(21,34));
+          return markerImage;
       }
     </script>
 
