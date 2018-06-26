@@ -5,18 +5,47 @@
     html,
     body {
       font-family: Arial;
-      height: 100%;
+      max-height: 100vh;
+      min-height: 100vh;
       margin: 0;
       padding: 0;
     }
 
+    .container {
+      min-height: 100vh;
+      max-height: 100vh;
+      display: flex;
+    }
+
+      #list-filter {
+        font-size: 1.5vw;
+        max-width: 15vw;
+        min-width: 15vw;
+      }
+      .list-box {
+        background: #fff;
+        height: 100vh;
+        line-height: 5vh;
+        text-align: left;
+        max-width: 20vw;
+        min-width: 20vw;
+      }
     #map {
-      height: 100%;
+      max-height: 100vh;
+      min-height: 100vh;
+      min-width: 80vw;
+      max-width: 80vw;
+      margin: 0;
     }
     </style>
   </head>
   <body>
-    <div id="map"></div>
+    <div class = "container">
+      <div class = "list-box">
+        <input id="list-filter" type="text" placeholder="Marked Location">
+      </div>
+      <div id="map"></div>
+    </div>
     <script>
       var map;
 
