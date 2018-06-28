@@ -12,8 +12,8 @@
       <div class = "list-box">
         <input id="list-filter" type="search" data-bind="textInput: searchQuery">
         <button>Query</button>
-        <ul class="list" data-bind="foreach: searchResults">
-          <li class="list-item" data-bind="with: Location">
+        <ul class="list" data-bind="foreach: ListOfLocations">
+          <li class="list-item" data-bind="with: Site">
             <span data-bind="text: title"></span>
           </li>
         </ul>
@@ -34,6 +34,16 @@
         for (var i = 0; i < data.length; i++) {
           self.ListOfLocations.push(new LocationList(data[i]));
         };
+
+        // Filtered List
+        self.searchResults = ko.pureComputed(function() {
+          return self.ListOfLocations
+          var query = self.searchQuery().trim().toLowerCase();
+          // maybe this should return self.ListOfLocations.
+          if (!query) return self.ListOfLocations();
+
+          return self.ListOfLocations().filter()
+        })
 
       }
 
@@ -60,6 +70,7 @@
         {Site: {title: "Glendon Borough Town Hall", lat:40.666093, lng: -75.234634}},
         {Site: {title: "Wawa", lat:40.687049, lng:-75.209854}}
       ];
+      ko.applyBindings(new ListViewModel(_allLocations == null ? new Array() : _allLocations));
       // This is everything for google Maps API creation
       var map;
 
