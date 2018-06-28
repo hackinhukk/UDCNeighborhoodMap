@@ -10,11 +10,57 @@
   <body>
     <div class = "container">
       <div class = "list-box">
-        <input id="list-filter" type="text" placeholder="Marked Location">
+        <input id="list-filter" type="search" data-bind="textInput: searchQuery">
+        <button>Query</button>
+        <ul class="list" data-bind="foreach: searchResults">
+          <li class="list-item" data-bind="with: Location">
+            <span data-bind="text: title"></span>
+          </li>
+        </ul>
       </div>
       <div id="map"></div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
     <script>
+      // Creation of the list using KnockoutJS
+      function ListViewModel(data) {
+        var self = this;
+        self.searchQuery  = ko.observable();
+        self.selectedItem = ko.observable();
+        self.title = ko.observable();
+
+        // Data Source
+        self.ListOfLocations = ko.observableArray([]);
+        for (var i = 0; i < data.length; i++) {
+          self.ListOfLocations.push(new LocationList(data[i]));
+        };
+
+      }
+
+      function LocationList(data) {
+        var self = this;
+        for (var key in data) {
+          if (key != "Site")
+            this[key] = ko.observable(data[key] == null ? "" : data[key]);
+        }
+        self.Site = ko.observable(data.Site);
+      }
+
+      function Site(data) {
+        var self = this;
+        for (var key in data) {
+          this[key] = ko.observable(data[key] == null ? "" : data[key]);
+        }
+      }
+
+      var _allLocations = [
+        {Site: {title: "Exxon", lat:40.668926, lng:-75.220224}},
+        {Site: {title: "CVS", lat:40.677652, lng: -75.210306}},
+        {Site: {title: "Dunkin Donuts", lat:40.677034,lng:-75.21087}},
+        {Site: {title: "Glendon Borough Town Hall", lat:40.666093, lng: -75.234634}},
+        {Site: {title: "Wawa", lat:40.687049, lng:-75.209854}}
+      ];
+      // This is everything for google Maps API creation
       var map;
 
       // Create a new blank array for all the listing markers.
