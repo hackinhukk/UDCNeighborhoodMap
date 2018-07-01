@@ -10,12 +10,14 @@
   </head>
   <body>
     <nav class="nav-bar">
-      <span class="nav-bar-title">Glendon Area Map</span>
+
       <form class ="nav-bar-form" role="search">
       <div class = "list-box">
         <input id="list-filter" placeholder="Search" type="search" data-bind="textInput: searchLoc, valueUpdate: 'afterkeydown'">
         <button>Clear</button>
       </div>
+      </form>
+      <span class="nav-bar-title">Glendon Area Map</span>
     </nav>
     <main>
       <ul class="list" data-bind="foreach: filterResults">
@@ -27,5 +29,6 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBCQHVxpU7th_iCg8JlYQDBHtQD7ReUW0&v=3&callback=initMap">
     </script>
+  </main>
   </body>
 </html>
