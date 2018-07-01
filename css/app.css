@@ -7,7 +7,7 @@ body {
   padding: 0;
 }
 
-.container {
+.nav-bar {
   min-height: 100vh;
   max-height: 100vh;
   display: flex;
