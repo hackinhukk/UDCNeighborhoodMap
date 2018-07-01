@@ -91,21 +91,22 @@ var LocationMarkerVM = function(data) {
   });
 
   // create click event to open an infowindow at the clicked marker.
-  self.marker.addListener('click', function() {
+  this.marker.addListener('click', function() {
     populateInfoWindow(this, infoWindow);
-    map.panTo(self.getPosition());
+    toggleAnimation(this);
+    map.panTo(this.getPosition());
   });
 
   // Event Listeneres to change icon colors
   // as you mouseover and remove your mouse from
   // the icon on the map.
 
-  self.marker.addListener('mouseover', function(){
-    self.setIcon(highlightedIcon);
+  this.marker.addListener('mouseover', function(){
+    this.setIcon(highlightedIcon);
   });
 
-  self.marker.addListener('mouseout', function() {
-    self.setIcon(defaultIcon);
+  this.marker.addListener('mouseout', function() {
+    this.setIcon(defaultIcon);
   });
 
   // show item information when selected from the dropdown list.
@@ -145,6 +146,36 @@ var ViewModel = function() {
   }, self);
 };
 
+// This function populates the infowindow when the marker is clicked.
+// one infowindow will open on the marker that is either clicked or selected
+// via the list, and populate above the marker's position.
+function populateInfoWindow(marker, infowindow) {
+  // Check to make sure the infowindow is not already opened on this specific marker
+  if (infowindow.marker != marker) {
+    infowindow.setContent('');
+    infowindow.marker = marker;
+
+    // Make sure the marker property is cleared when the infowindow is closed by the user.
+    infowindow.addListener('closeclick', function() {
+      infowindow.marker = null;
+    });
+
+    var windowContent = '<h3>' + marker.title + '</h4>';
+    infowindow.setContent(windowContent);
+    infowindow.open(map, marker)
+  }
+}
+
+function toggleAnimation(marker) {
+  if (marker.getAnimation() != null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function() {
+      marker.setAnimation(null);
+    }, 2000);
+  }
+}
 // This function takes in a color, and then creatres a new
 // marker icon with the input color.  The icon will be 21 px wide
 // by 34 px high.

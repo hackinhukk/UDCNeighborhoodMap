@@ -14,7 +14,7 @@
       <div class = "list-box">
         <input id="list-filter" type="search" data-bind="textInput: searchLoc, valueUpdate: 'afterkeydown'">
         <button>Query</button>
-        <ul class="list" data-bind="foreach: locationList">
+        <ul class="list" data-bind="foreach: filterResults">
             <li class="list-item" data-bind="text: title, click: showLoc"></li>
         </ul>
       </div>
