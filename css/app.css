@@ -39,11 +39,15 @@ ul {
     color: grey;
     margin-left: auto;
   }
-
+  #button {
+    color: black;
+    background-color: white;
+  }
   #list-filter {
     font-size: 1.5vw;
-    max-width: 15vw;
-    min-width: 15vw;
+    max-width: 10vw;
+    min-width: 10vw;
+    background-color: #F4F4F4;
   }
   .list-box {
     background: #373737;
