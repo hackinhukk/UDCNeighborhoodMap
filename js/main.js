@@ -70,7 +70,12 @@ var LocationMarkerVM = function(data) {
   // Create a "highlighted location" marker color for when
   // the user mouses over the marker.
   var highlightedIcon = makeMarkerIcon('1245FC');
+  // foursquare API
+  var clientID = 'XOJGPXSP35ACPHN42PTCL13OTCJDYKTVSU2XD0MXE2T3RMRZ';
+  var clientSecret = 'TKG2ZR40KB1UTLKNJM5EEFW4JEPVNI1ZAEMTK5LJVVN2XPB0';
 
+  var reqURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.position.lat + ',' + this.position.lng + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20160118' + '&query=' + this.title;
+  // get JSON request of response from foursquare data
   // Create a marker for each location, and put it into markers array
   self.marker = new google.maps.Marker({
     position: self.location,
