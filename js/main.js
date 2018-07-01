@@ -25,10 +25,10 @@ var locationData = [
     }
   },
   {
-    title: "Glendon Borough Town Hall",
+    title: "Papa John's",
     location: {
-      lat:40.666093,
-      lng: -75.234634
+      lat:40.679594,
+      lng: -75.247009
     }
   },
   {
@@ -60,10 +60,11 @@ function initMap() {
 var LocationMarkerVM = function(data) {
   var self = this;
 
-  self.title = data.title;
-  self.location = data.location;
+  this.title = data.title;
+  this.location = data.location;
+  this.address = '';
 
-  self.visible = ko.observable(true);
+  this.visible = ko.observable(true);
 
   // This will create the default Icon Marker
   var defaultIcon = makeMarkerIcon('FF0404');
@@ -73,9 +74,16 @@ var LocationMarkerVM = function(data) {
   // foursquare API
   var clientID = 'XOJGPXSP35ACPHN42PTCL13OTCJDYKTVSU2XD0MXE2T3RMRZ';
   var clientSecret = 'TKG2ZR40KB1UTLKNJM5EEFW4JEPVNI1ZAEMTK5LJVVN2XPB0';
-
-  var reqURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.position.lat + ',' + this.position.lng + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20160118' + '&query=' + this.title;
   // get JSON request of response from foursquare data
+  var reqURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.location.lat + ',' + this.location.lng + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20160118' + '&query=' + this.title;
+
+  $.getJSON(reqURL).done(function(data) {
+    var results = data.response.venues[0];
+    self.address = results.location.formattedAddress[0] ? results.location.formattedAddress[0]: 'Not Loading';
+  }).fail(function() {
+    alert('Something went wrong with foursquare API request');
+  });
+
   // Create a marker for each location, and put it into markers array
   self.marker = new google.maps.Marker({
     position: self.location,
@@ -97,7 +105,7 @@ var LocationMarkerVM = function(data) {
 
   // create click event to open an infowindow at the clicked marker.
   this.marker.addListener('click', function() {
-    populateInfoWindow(this, infoWindow);
+    populateInfoWindow(this, self.address, infoWindow);
     toggleAnimation(this);
     map.panTo(this.getPosition());
   });
@@ -154,7 +162,7 @@ var ViewModel = function() {
 // This function populates the infowindow when the marker is clicked.
 // one infowindow will open on the marker that is either clicked or selected
 // via the list, and populate above the marker's position.
-function populateInfoWindow(marker, infowindow) {
+function populateInfoWindow(marker, address, infowindow) {
   // Check to make sure the infowindow is not already opened on this specific marker
   if (infowindow.marker != marker) {
     infowindow.setContent('');
@@ -165,7 +173,7 @@ function populateInfoWindow(marker, infowindow) {
       infowindow.marker = null;
     });
 
-    var windowContent = '<h3>' + marker.title + '</h4>';
+    var windowContent = '<h3>' + marker.title + '</h4>' + '<p>' + address + '</p>';
     infowindow.setContent(windowContent);
     infowindow.open(map, marker)
   }
