@@ -13,11 +13,11 @@ You will need a modern web browser.  I personally used version 67.0.3396.99 (64-
 
 ### Installing
 
-Once you have downloaded the file, just open the downloaded directory, and open the main.html file, either manually or through typing the command
+Once you have downloaded the UDCNeighborhoodMap directory, just open the downloaded directory, and open the main.html file, either manually or through typing the command
 ```
 open main.html
 ```
-into your terminal once you are in the downloaded directory.
+into your terminal once you are in the UDCNeighborhoodMap directory.
 
 
 
