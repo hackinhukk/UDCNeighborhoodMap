@@ -1,6 +1,6 @@
 # UDC Google Maps
 
-This is the fifth project for Udacity's full stack web developer nanodegree program.  This project uses Google Maps API to display markers that can be clicked on, which displays information about the marked area.  The provided address in each infowindow is provided by Foursquare's API.  
+This is the fifth project for Udacity's full stack web developer nanodegree program.  This project uses Google Maps API to display markers that can be clicked on, which displays information about the marked area.  The address in each infowindow is provided by Foursquare's API.  
 
 
 
