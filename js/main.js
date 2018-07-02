@@ -2,23 +2,23 @@
 let map;
 let infoWindow;
 let bounds;
-const locationData = [
+const LOCATION_DATA = [
   {
-    title: "Exxon",
+    title: 'Exxon',
     location: {
       lat:40.668926,
       lng:-75.220224
     }
   },
   {
-    title: "CVS",
+    title: 'CVS',
     location: {
       lat:40.677652,
       lng: -75.210306
     }
   },
   {
-    title: "Dunkin Donuts",
+    title: 'Dunkin Donuts',
     location: {
       lat:40.677034,
       lng:-75.21087
@@ -32,7 +32,7 @@ const locationData = [
     }
   },
   {
-    title: "Wawa",
+    title: 'Wawa',
     location: {
       lat:40.687049,
       lng:-75.209854
@@ -41,23 +41,23 @@ const locationData = [
 ];
 
 function initMap() {
-  let glendonBorough = {
+  const GLENDON_BOROUGH = {
     lat:40.666093,
     lng: -75.234634
   };
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,
-    center: glendonBorough
+    center: GLENDON_BOROUGH
   });
 
   infoWindow = new google.maps.InfoWindow();
 
   bounds = new google.maps.LatLngBounds();
 
-  ko.applyBindings(new ViewModel());
+  ko.applyBindings(new viewModel());
 }
 
-let LocationMarkerVM = function(data) {
+let locationMarkerVM = function(data) {
   let self = this;
 
   this.title = data.title;
@@ -129,7 +129,7 @@ let LocationMarkerVM = function(data) {
 }
 
 // View Model overall, includes list */
-let ViewModel = function() {
+let viewModel = function() {
   let self = this;
 
   self.searchLoc = ko.observable('');
@@ -137,8 +137,8 @@ let ViewModel = function() {
   self.locationList = ko.observableArray([]);
 
   // add location markers for each location
-  locationData.forEach(function(location) {
-    self.locationList.push( new LocationMarkerVM(location));
+  LOCATION_DATA.forEach(function(location) {
+    self.locationList.push( new locationMarkerVM(location));
   });
 
   // location results filtered from input
