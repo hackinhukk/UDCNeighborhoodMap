@@ -10,25 +10,24 @@
   </head>
   <body>
     <nav class="nav-bar">
-
       <form class ="nav-bar-form" role="search">
-      <div class = "list-box">
-        <input id="list-filter" placeholder="Search" type="search" data-bind="textInput: searchLoc, valueUpdate: 'afterkeydown'">
-        <button id="button">Clear</button>
-      </div>
+        <div class = "list-box">
+          <input id="list-filter" placeholder="Search" type="search" data-bind="textInput: searchLoc, valueUpdate: 'afterkeydown'">
+          <button id="button">Clear</button>
+        </div>
       </form>
       <span class="nav-bar-title">Glendon Area Map</span>
     </nav>
     <main>
       <ul class="list" data-bind="foreach: filterResults">
-          <a class="list-item" data-bind="text: title, click: showLoc"></a>
+        <a class="list-item" data-bind="text: title, click: showLoc"></a>
       </ul>
       <div id="map"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
-    <script src="js/main.js"></script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBCQHVxpU7th_iCg8JlYQDBHtQD7ReUW0&v=3&callback=initMap", onerror="googleMapsError()">
-    </script>
-  </main>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+      <script src="js/main.js"></script>
+      <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBCQHVxpU7th_iCg8JlYQDBHtQD7ReUW0&v=3&callback=initMap", onerror="googleMapsError()">
+      </script>
+    </main>
   </body>
 </html>
