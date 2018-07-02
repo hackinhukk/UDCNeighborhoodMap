@@ -1,8 +1,8 @@
 // Declaring Global Variables
-var map;
-var infoWindow;
-var bounds;
-var locationData = [
+let map;
+let infoWindow;
+let bounds;
+const locationData = [
   {
     title: "Exxon",
     location: {
@@ -41,7 +41,7 @@ var locationData = [
 ];
 
 function initMap() {
-  var glendonBorough = {
+  let glendonBorough = {
     lat:40.666093,
     lng: -75.234634
   };
@@ -57,8 +57,8 @@ function initMap() {
   ko.applyBindings(new ViewModel());
 }
 
-var LocationMarkerVM = function(data) {
-  var self = this;
+let LocationMarkerVM = function(data) {
+  let self = this;
 
   this.title = data.title;
   this.location = data.location;
@@ -67,18 +67,18 @@ var LocationMarkerVM = function(data) {
   this.visible = ko.observable(true);
 
   // This will create the default Icon Marker
-  var defaultIcon = makeMarkerIcon('FF0404');
+  let defaultIcon = makeMarkerIcon('FF0404');
   // Create a "highlighted location" marker color for when
   // the user mouses over the marker.
-  var highlightedIcon = makeMarkerIcon('1245FC');
+  let highlightedIcon = makeMarkerIcon('1245FC');
   // foursquare API
-  var clientID = 'XOJGPXSP35ACPHN42PTCL13OTCJDYKTVSU2XD0MXE2T3RMRZ';
-  var clientSecret = 'TKG2ZR40KB1UTLKNJM5EEFW4JEPVNI1ZAEMTK5LJVVN2XPB0';
+  let clientID = 'XOJGPXSP35ACPHN42PTCL13OTCJDYKTVSU2XD0MXE2T3RMRZ';
+  let clientSecret = 'TKG2ZR40KB1UTLKNJM5EEFW4JEPVNI1ZAEMTK5LJVVN2XPB0';
   // get JSON request of response from foursquare data
-  var reqURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.location.lat + ',' + this.location.lng + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20160118' + '&query=' + this.title;
+  let reqURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.location.lat + ',' + this.location.lng + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20160118' + '&query=' + this.title;
 
   $.getJSON(reqURL).done(function(data) {
-    var results = data.response.venues[0];
+    let results = data.response.venues[0];
     self.address = results.location.formattedAddress[0] ? results.location.formattedAddress[0]: 'Not Loading';
   }).fail(function() {
     alert('Something went wrong with foursquare API request');
@@ -129,8 +129,8 @@ var LocationMarkerVM = function(data) {
 }
 
 // View Model overall, includes list */
-var ViewModel = function() {
-  var self = this;
+let ViewModel = function() {
+  let self = this;
 
   self.searchLoc = ko.observable('');
 
@@ -143,11 +143,11 @@ var ViewModel = function() {
 
   // location results filtered from input
   self.filterResults = ko.computed(function() {
-    var query = this.searchLoc().toLowerCase();
+    let query = this.searchLoc().toLowerCase();
     if (query) {
       return ko.utils.arrayFilter(self.locationList(), function(location) {
-        var str = location.title.toLowerCase();
-        var result = str.includes(query);
+        let str = location.title.toLowerCase();
+        let result = str.includes(query);
         location.visible(result);
           return result;
       });
@@ -173,7 +173,7 @@ function populateInfoWindow(marker, address, infowindow) {
       infowindow.marker = null;
     });
 
-    var windowContent = '<h3>' + marker.title + '</h4>' + '<p>' + address + '</p>';
+    let windowContent = '<h3>' + marker.title + '</h4>' + '<p>' + address + '</p>';
     infowindow.setContent(windowContent);
     infowindow.open(map, marker)
   }
@@ -193,7 +193,7 @@ function toggleAnimation(marker) {
 // marker icon with the input color.  The icon will be 21 px wide
 // by 34 px high.
 function makeMarkerIcon(markerColor) {
-  var markerImage = new google.maps.MarkerImage(
+  let markerImage = new google.maps.MarkerImage(
     'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor + '|40|_|%E2%80%A2',
     new google.maps.Size(21, 34),
     new google.maps.Point(0,0),
