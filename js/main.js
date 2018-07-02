@@ -201,3 +201,8 @@ function makeMarkerIcon(markerColor) {
     new google.maps.Size(21,34));
   return markerImage;
 }
+
+// handle google maps retreival error
+function googleMapsError() {
+  alert('Error occured loading Google Maps API.');
+}

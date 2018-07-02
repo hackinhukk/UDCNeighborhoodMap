@@ -22,10 +22,11 @@ into your terminal once you are in the downloaded directory.
 
 
 ## Built With
+HTML5, CSS, Javascript.  As well as the following APIs and Frameworks:
 
-* [Vagrant](https://www.vagrantup.com/) - Virtual Machine to run linux on
-* [Sqlite](https://www.sqlite.org/index.html) - Open Source Relational Database
-* [Python](https://www.python.org/) - Programming Language (Version 2.7)
+* [Foursquare](https://developer.foursquare.com/) - Third Party API to gather address information from.
+* [Google Maps](https://developers.google.com/maps/documentation/javascript/tutorial) - Google Maps API
+* [KnockoutJS](http://knockoutjs.com/) - Front-End MVVM Javascript  Framework
 
 ## Contributing
 
