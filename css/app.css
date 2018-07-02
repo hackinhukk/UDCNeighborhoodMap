@@ -35,7 +35,7 @@ ul {
     background-color: #C0B283;
   }
   .nav-bar-title {
-    font-size: 1.8vw;
+    font-size: 2.5vw;
     color: grey;
     margin-left: auto;
   }
@@ -45,8 +45,8 @@ ul {
   }
   #list-filter {
     font-size: 1.5vw;
-    max-width: 10vw;
-    min-width: 10vw;
+    max-width: 15vw;
+    min-width: 15vw;
     background-color: #F4F4F4;
   }
   .list-box {
@@ -62,8 +62,9 @@ ul {
     color: #C0B283;
     background-color: #F4F4F4;
     border: solid;
-    max-height: 5vh;
+    max-height: 10vh;
     min-height: 5vh;
+    font-size: 2.5vw;
   }
   .list-item:hover {
     color: #373737;
@@ -78,4 +79,44 @@ ul {
   min-width: 80vw;
   max-width: 80vw;
   margin: 0;
+}
+
+
+/* Media Query Section */
+
+@media screen and (max-width: 1050px)
+{
+  .nav-bar-title {
+    font-size: 3vw;
+  }
+  #list-filter {
+    max-width: 10vw;
+    min-width: 10vw;
+  }
+
+  .list-item {
+    font-size: 3vw;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .nav-bar-title {
+    font-size: 5vw;
+  }
+}
+@media screen and (max-width: 525px) {
+  .nav-bar-title {
+    font-size: 6vw;
+  }
+  #list-filter {
+    max-width: 15vw;
+    min-width: 15vw;
+  }
+  #button {
+    visibility: hidden;
+  }
+  .list-item{
+    font-size: 3.5vw;
+  }
+
 }
